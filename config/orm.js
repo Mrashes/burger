@@ -1,33 +1,35 @@
 let connection = require('./connection.js');
 
 let orm ={
-    selectAll: function(tableName) {
+    selectAll: function(tableName, cb) {
         var query = connection.query(
             "select * from ??", [tableName],
             function(err, res) {
-                console.log(res)
+                if (err) throw err;
+                cb(res);
             }
         )
     },
 
-    insertOne: function(burgerName) {
+    insertOne: function(table, head, burgerName, cb) {
         var query = connection.query(
-            "INSERT INTO burgers (burger_name) VALUES (?)", [burgerName],
+            "INSERT INTO ?? (??) VALUES (?)", [table, head, burgerName],
             function(err, res) {
-                console.log(res)
+                if (err) throw err;
+                cb(res);
             }
         )
     },
 
-    updateOne: function(burgerName) {
+    updateOne: function(table, head, burgerName, cb) {
         var query = connection.query(
-            "UPDATE burgers SET devoured = TRUE WHERE burger_name = ?", [burgerName],
+            "UPDATE ?? SET ?? = TRUE WHERE burger_name = ?", [table, head, burgerName],
             function(err, res) {
-                console.log(res)
+                if (err) throw err;
+                cb(res);
             }
         )
     }
 }
 
-orm.updateOne("Bacon-Cheeseburger")
-orm.selectAll('burgers')
+module.exports = orm;
