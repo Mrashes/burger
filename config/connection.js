@@ -2,14 +2,14 @@ let mysql = require('mysql')
 var connection
 
 if (process.env.JAWSDB_URL) {
-    connection = mysql.createConnection(process.eventNames.JAWSDB_URL);
+    connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
     connection = mysql.createConnection({
-        host: 	"gk90usy5ik2otcvi.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+        host: "localhost",
         port: 3306,
-        user: "xcze2zf9hlnbvj8t",
-        password: "kusthcbyxz5e17ez",
-        database: "burgers_db"
+        user: "root",
+        password: "Shaina2013Walker",
+        database: "burger"
     });
 }
 
